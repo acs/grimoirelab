@@ -9,8 +9,8 @@ elasticsearch:
     - "9200:9200"
   environment:
     - ES_JAVA_OPTS=-Xms2g -Xmx2g
-  volumes:
-    - ./elasticsearch.yml:/elasticsearch/config/elasticsearch.yml
+#  volumes:
+#    - ./elasticsearch.yml:/elasticsearch/config/elasticsearch.yml
 
 kibiter:
   image: bitergia/kibiter:5.6.0
@@ -33,7 +33,7 @@ mariadb:
     command: --wait_timeout=2592000 --interactive_timeout=2592000 --max_connections=300
 
 mordred:
-  image: grimoirelab/basic:latest
+  image: grimoirelab/grimoirelab:latest
   links:
     - mariadb
     - elasticsearch
