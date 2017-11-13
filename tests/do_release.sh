@@ -2,8 +2,13 @@
 
 echo "Doing the GrimoireLab release ..."
 
+if [ -z "$1" ]
+  then
+    echo "do_release.sh <GITHUB_API_TOKEN>"
+fi
+
 # You need to configure a GitHub API token
-GITHUB_API_TOKEN=''
+GITHUB_API_TOKEN=$1
 
 if [[ -z $GITHUB_API_TOKEN ]]; then
   echo "GitHub API token not configured"
@@ -31,7 +36,7 @@ docker-compose rm -f mordred
 # docker-compose  rm
 # Start the mordred container to do the full testing
 echo "Executing mordred container ..."
-docker-compose up mordred
+docker-compose -f docker-compose.yml -f docker-compose-local.yml up mordred
 echo "Checking for errors mordred execution ..."
 grep -i error logs/all.log
 echo "Checking panels ..."
