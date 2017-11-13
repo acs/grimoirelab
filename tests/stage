@@ -1,7 +1,10 @@
 #!/bin/bash
 
-echo "Installing and checking GrimoireLab"
-sudo grimoirelab/utils/build_grimoirelab --build --install --check --install_system
+HOME_DIR='/home/grimoirelab'
+CONF_DIR="$HOME_DIR/conf"
+
+echo "Installing and checking GrimoireLab Release"
+sudo grimoirelab/utils/build_grimoirelab --build --install --check --install_system --relfile $CONF_DIR/requirements.cfg -l debug
 
 # This could be an ENV var probably
 #REDIS="redis"
@@ -16,14 +19,14 @@ sudo grimoirelab/utils/build_grimoirelab --build --install --check --install_sys
 #(arthurw -g -d redis://$REDIS/8 > /home/bitergia/logs/worker-collect.log 2>&1) &
 #(arthurw -g -d redis://$REDIS/8 update > /home/bitergia/logs/worker-update.log 2>&1) &
 
-mkdir /home/grimoirelab/mordred
-ln -s /home/grimoirelab/panels /home/grimoirelab/mordred/panels
-#ln -s /home/bitergia/reports /home/bitergia/mordred/reports
+mkdir $HOME_DIR/mordred
+ln -s $HOME_DIR/panels $HOME_DIR/mordred/panels
+#ln -s $HOME_DIR/reports $HOME_DIR/mordred/reports
 
 # Extracting the perceval cache
 echo "Extracting the perceval cache data ..."
-cd /home/grimoirelab/conf && tar xfz cache-test.tgz
-ln -s /home/grimoirelab/conf/perceval-cache /home/grimoirelab/.perceval
+cd $CONF_DIR && tar xfz cache-test.tgz
+ln -s $CONF_DIR/perceval-cache $HOME_DIR/.perceval
 
 # Wait for Elasticsearch
 echo "Waiting for elasticsearch startup completion ..."
@@ -42,4 +45,7 @@ until $(curl --output /dev/null --silent --head --fail http://172.17.0.1:5601); 
     sleep 5
 done
 echo "Kibiter OK"
-cd /home/grimoirelab && mordred -c conf/setup.cfg
+cd $CONF_DIR
+# Hack until the panels package is working
+git clone https://github.com/grimoirelab/panels.git
+mordred -c setup.cfg

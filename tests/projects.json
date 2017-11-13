@@ -56,7 +56,7 @@
             "https://jira.opnfv.org"
         ],
         "mbox": [
-            "metrics-grimoire /home/bitergia/.perceval/mbox"
+            "metrics-grimoire /home/grimoirelab/.perceval/mbox"
         ],
         "mediawiki": [
             "https://wiki.mozilla.org"
@@ -97,7 +97,7 @@
             "C7LSGB0AU"
         ],
         "supybot": [
-            "openshift /home/bitergia/.perceval/irc/percevalbot/logs/ChannelLogger/freenode/#openshift/"
+            "openshift /home/grimoirelab/.perceval/irc/percevalbot/logs/ChannelLogger/freenode/#openshift/"
         ],
         "telegram": [
             "Mozilla_analytics"
