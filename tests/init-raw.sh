@@ -8,3 +8,4 @@ $RAW2FILE -g  -p -e $ES -i apache_test-raw -f $CACHE/raw/apache.json
 $RAW2FILE -g  -p -e $ES -i twitter_test-raw -f $CACHE/raw/twitter.json
 $RAW2FILE -g  -p -e $ES -i askbot_test-raw -f $CACHE/raw/askbot.json
 $RAW2FILE -g  -p -e $ES -i remo_activities_test-raw -f $CACHE/raw/remo_activities.json
+$RAW2FILE -g  -p -e $ES -i crates_test-raw -f $CACHE/raw/crates.json

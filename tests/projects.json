@@ -18,6 +18,7 @@
         "discourse": [
             "https://foro.mozilla-hispano.org/"
         ],
+        "crates": [""],
         "dockerhub": [
             "bitergia kibiter"
         ],
