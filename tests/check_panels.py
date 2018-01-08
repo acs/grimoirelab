@@ -35,7 +35,7 @@ from elasticsearch import Elasticsearch
 from mordred.config import Config
 from mordred.task_panels import TaskPanels
 
-from panels.src.owlwatch.schema.model import Panel, ESMapping
+from owlwatch.schema.model import Panel, ESMapping
 
 # Load the mordred config to check all data sources to check
 # Load the panels file also from TaskPanels
