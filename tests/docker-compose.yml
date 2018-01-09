@@ -16,8 +16,8 @@ kibiter:
   image: bitergia/kibiter:5.6.0
   links:
     - elasticsearch
-#  ports:
-#    - "5601:5601"
+  ports:
+   - "5601:5601"
   environment:
     # - ELASTICSEARCH_URL=http://172.17.0.1:9200
     - ELASTICSEARCH_USER=bitergia
@@ -32,12 +32,21 @@ mariadb:
         - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     command: --wait_timeout=2592000 --interactive_timeout=2592000 --max_connections=300
 
+redis:
+  image: redis:latest
+  command: redis-server --appendonly yes
+  # ports:
+  #   - "6379:6379"
+  volumes:
+    - redis-data:/data
+
 mordred:
   image: grimoirelab/grimoirelab:latest
   links:
-    - mariadb
     - elasticsearch
     - kibiter
+    - mariadb
+    - redis
   volumes:
     # The stage for this mordred load raw items, waits for ES ...
     - ./stage:/home/grimoirelab/stage
