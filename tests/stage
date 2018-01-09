@@ -7,17 +7,17 @@ echo "Installing and checking GrimoireLab Release"
 sudo grimoirelab/utils/build_grimoirelab --build --install --check --install_system --relfile $CONF_DIR/requirements.cfg -l debug
 
 # This could be an ENV var probably
-#REDIS="redis"
+REDIS="redis"
 
 # arthur on
-#arthurd -g -d redis://$REDIS/8 --es-index $ARTHUR_ELASTICSEARCH_INDEX --log-path /home/bitergia/logs/arthurd --no-cache
+arthurd -g -d redis://$REDIS/8 --log-path $HOME_DIR/logs/arthurd --no-cache
 # Give time to arthur to create the raw index
-#echo "Waiting for arthur startup completion ..."
-#sleep 5
-#echo "Starting two workers: collect and update tasks"
+echo "Waiting for arthur startup completion ..."
+sleep 5
+echo "Starting two workers: collect and update tasks"
 # Two workers
-#(arthurw -g -d redis://$REDIS/8 > /home/bitergia/logs/worker-collect.log 2>&1) &
-#(arthurw -g -d redis://$REDIS/8 update > /home/bitergia/logs/worker-update.log 2>&1) &
+(arthurw -g -d redis://$REDIS/8 > $HOME_DIR/logs/worker-collect.log 2>&1) &
+(arthurw -g -d redis://$REDIS/8 update > $HOME_DIR/logs/worker-update.log 2>&1) &
 
 mkdir $HOME_DIR/mordred
 ln -s $HOME_DIR/panels $HOME_DIR/mordred/panels
