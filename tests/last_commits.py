@@ -33,6 +33,9 @@ ORG = 'grimoirelab'
 GITHUB_REPOS_API = 'https://api.github.com/repos' + '/' + ORG
 GITHUB_ORGS_API = 'https://api.github.com/orgs' + '/'+ ORG
 
+# HACK to cover the migration to CHAOSS of GrimoireLab repositories
+CHAOSS_REPOS = ['https://api.github.com/repos/chaoss/grimoirelab-manuscripts', 'https://api.github.com/repos/chaoss/grimoirelab-kidash']
+
 def get_params():
     parser = argparse.ArgumentParser(usage="usage:last_commits.py [options]",
                                      description="Collect the last commit " + \
@@ -74,4 +77,11 @@ if __name__ == '__main__':
         res = send_github(commits_url)
         commit = res.json()['sha']
         repo_name = repo.upper().replace("-", "_").replace(".", "_")
+        print(repo_name + "='" + commit + "'")
+    for repo in CHAOSS_REPOS:
+        # Return the last commit from master branch
+        commits_url = repo + "/commits/master"
+        res = send_github(commits_url)
+        commit = res.json()['sha']
+        repo_name = repo.rsplit("/", 1)[1].replace("grimoirelab-", "").upper()
         print(repo_name + "='" + commit + "'")
