@@ -32,6 +32,9 @@ from urllib.parse import quote_plus
 
 import requests
 
+HEADERS = {"Content-Type": "application/json"}
+
+
 def get_params():
     parser = argparse.ArgumentParser(usage="usage:raw2file [options]",
                                      description="Collect/Publish JSON items between Elasticsearch and a file")
@@ -91,7 +94,7 @@ def publish_items(elastic_url, index, import_file):
         # There must be one type in the index
         es_type = list(mappings['mappings'].keys())[0]
         # Create the index with the mapping. If exists don't do anything
-        create = requests.put('%s/%s' % (elastic_url, index), data=json.dumps(mappings))
+        create = requests.put('%s/%s' % (elastic_url, index), headers=HEADERS, data=json.dumps(mappings))
         if create.status_code == 400:  # bad request
             logging.error(create.json()['error']['root_cause'][0]['reason'])
             # create.raise_for_status()
@@ -101,7 +104,7 @@ def publish_items(elastic_url, index, import_file):
             for item in items:
                 _id = quote_plus(item['_id'])
                 # Don't use the bulk interface because the number of items is low
-                add_item = requests.put('%s/%s/%s/%s' % (elastic_url, index, es_type, _id), data=json.dumps(item['_source']))
+                add_item = requests.put('%s/%s/%s/%s' % (elastic_url, index, es_type, _id), headers=HEADERS, data=json.dumps(item['_source']))
                 add_item.raise_for_status()
                 npublished += 1
 
