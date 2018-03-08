@@ -1,4 +1,4 @@
-CACHE=perceval-cache
+CACHE=perceval-init
 RAW2FILE=./raw2file.py
 ES="http://bitergia:bitergia@172.17.0.1:9200"
 echo Using $ES as the Elasticsearch endpoint. Adjust it to your endpoint.
