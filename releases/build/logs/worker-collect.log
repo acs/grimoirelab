@@ -1,0 +1,9 @@
+[2018-03-08 17:27:11,622 - rq.worker - DEBUG] - Registering birth of worker c7154c52e05d.563
+[2018-03-08 17:27:11,626 - rq.worker - INFO] - RQ worker 'rq:worker:c7154c52e05d.563' started, version 0.10.0
+[2018-03-08 17:27:11,626 - rq.worker - INFO] - *** Listening on archive, create, update...
+[2018-03-08 17:27:11,626 - rq.worker - DEBUG] - Sent heartbeat to prevent worker timeout. Next one should arrive within 420 seconds.
+[2018-03-08 17:27:11,627 - rq.worker - INFO] - Cleaning registries for queue: archive
+[2018-03-08 17:27:11,628 - rq.worker - INFO] - Cleaning registries for queue: create
+[2018-03-08 17:27:11,629 - rq.worker - INFO] - Cleaning registries for queue: update
+[2018-03-08 17:27:11,629 - rq.worker - DEBUG] - *** Listening on archive,create,update...
+[2018-03-08 17:27:11,630 - rq.worker - DEBUG] - Sent heartbeat to prevent worker timeout. Next one should arrive within 420 seconds.

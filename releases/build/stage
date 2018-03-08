@@ -1,0 +1,77 @@
+#!/bin/bash
+
+HOME_DIR='/home/bitergia'
+CONF_DIR="$HOME_DIR/conf"
+
+cd $HOMEDIR
+
+source $CONF_DIR/requirements.cfg
+
+if [ $RELEASE ]; then
+    wget https://raw.githubusercontent.com/chaoss/grimoirelab/master/releases/$RELEASE -O $CONF_DIR/requirements.cfg
+    echo $RELEASE > $HOME_DIR/release
+else
+    echo "customized release, see $CONF_DIR/requirements.cfg file" > $CONF_DIR/release
+fi
+
+# get grimoirelab repo for the build_grimoirelab script
+# git clone https://github.com/grimoirelab/grimoirelab.git --depth 1
+wget https://raw.githubusercontent.com/chaoss/grimoirelab/master/utils/build_grimoirelab
+chmod 755 build_grimoirelab
+
+echo "Installing and checking GrimoireLab Release"
+sudo ./build_grimoirelab --build --install --check --install_system --relfile $CONF_DIR/requirements.cfg -l debug
+
+# This could be an ENV var probably (it is defined in mordred conf)
+REDIS="redis"
+
+# arthur on
+arthurd -g -d redis://$REDIS/8 --log-path $HOME_DIR/logs/arthurd
+# Give time to arthur to create the raw index
+echo "Waiting for arthur startup completion ..."
+sleep 5
+echo "Starting two workers: collect and update tasks"
+# Two workers
+(arthurw -g -d redis://$REDIS/8 > $HOME_DIR/logs/worker-collect.log 2>&1) &
+(arthurw -g -d redis://$REDIS/8 update > $HOME_DIR/logs/worker-update.log 2>&1) &
+
+
+####
+## STEPS ONLY DONE FOR THE TESTING OF GRIMOIRELAB
+###
+
+# Extracting the perceval cache
+echo "Extracting the perceval init data ..."
+cd $CONF_DIR && tar xfz perceval-init.tgz
+ln -s $CONF_DIR/perceval-init $HOME_DIR/.perceval
+
+# Wait for Elasticsearch
+echo "Waiting for elasticsearch startup completion ..."
+until $(curl --output /dev/null --silent --head --fail http://172.17.0.1:9200); do
+    printf '.'
+    sleep 5
+done
+echo "Elasticsearch OK"
+# Load raw data
+echo "Loading initial raw data ..."
+cd $CONF_DIR && ./init-raw.sh
+
+# We need to wait also for Kibiter so the version can be collected
+echo "Waiting for kibiter startup completion ..."
+until $(curl --output /dev/null --silent --head --fail http://172.17.0.1:5601); do
+    printf '.'
+    sleep 5
+done
+echo "Kibiter OK"
+
+####
+## END STEPS ONLY DONE FOR THE TESTING OF GRIMOIRELAB
+###
+
+# Hack to get the panels menu file
+wget https://raw.githubusercontent.com/grimoirelab/mordred/master/menu.yaml
+mordred -c $CONF_DIR/setup.cfg
+
+
+# Debugging the migration to perceval archive
+# sleep 36000
