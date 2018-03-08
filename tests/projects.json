@@ -1,39 +1,44 @@
 {
     "grimoire": {
         "apache": [
-          ""
+            ""
         ],
         "askbot": [
-          "https://ask.puppet.com"
+            "http://example.com"
         ],
         "bugzilla": [
-            "https://bugs.eclipse.org/bugs/"
+            "http://example.com"
         ],
         "bugzillarest": [
-            "https://bugzilla.mozilla.org"
+            "http://example.com"
         ],
         "confluence": [
-            "https://wiki.open-o.org/"
+            "http://example.com"
+        ],
+        "crates": [
+            ""
         ],
         "discourse": [
-            "https://foro.mozilla-hispano.org/"
+            "http://example.com"
         ],
-        "crates": [""],
         "dockerhub": [
-            "bitergia kibiter"
+            "grimoirelab perceval"
         ],
         "functest": [
             "http://testresults.opnfv.org/test/"
         ],
         "gerrit": [
-            "review.openstack.org"
+            "gerrit.wikimedia.org"
         ],
         "git": [
             "https://github.com/VizGrimoire/GrimoireLib --filters-raw-prefix data.files.file:grimoirelib_alch data.files.file:README.md",
             "https://github.com/MetricsGrimoire/CMetrics"
         ],
         "github": [
-            "https://github.com/grimoirelab/perceval"
+            "https://github.com/zhquan_example/repo"
+        ],
+        "gitlab": [
+            "https://gitlab.com/fdroid/fdroiddata"
         ],
         "google_hits": [
             ""
@@ -41,38 +46,32 @@
         "hyperkitty": [
             "https://lists.mailman3.org/archives/list/mailman-users@mailman3.org"
         ],
-        "*jenkins": [
-            "http://jenkins.cyanogenmod.com/"
-        ],
         "jenkins": [
-            "https://build.opnfv.org/ci"
-        ],
-        "*jira": [
-            "https://tickets.puppetlabs.com"
-        ],
-        "*jira": [
-            "https://jira.iotivity.org/"
+            "http://example.com/ci"
         ],
         "jira": [
-            "https://jira.opnfv.org"
+            "http://example.com"
+        ],
+        "launchpad": [
+            "https://launchpad.net/"
         ],
         "mbox": [
             "metrics-grimoire /home/grimoirelab/.perceval/mbox"
         ],
         "mediawiki": [
-            "https://wiki.mozilla.org"
+            "http://example.com"
         ],
         "meetup": [
-            "South-East-Puppet-User-Group"
+            "sqlpass-es"
         ],
         "mozillaclub": [
-            "https://spreadsheets.google.com/feeds/cells/1QHl2bjBhMslyFzR5XXPzMLdzzx7oeSKTbgR5PM8qp64/ohaibtm/public/values?alt=json"
+            "http://example.com/feed"
         ],
         "nntp": [
-            "news.mozilla.org mozilla.dev.project-link"
+            "nntp.example.com example.dev.project-link"
         ],
         "phabricator": [
-            "https://phabricator.wikimedia.org"
+            "http://example.com"
         ],
         "pipermail": [
             "https://mail.gnome.org/archives/libart-hackers/"
@@ -81,27 +80,25 @@
             ""
         ],
         "redmine": [
-            "http://tracker.ceph.com/"
+            "http://example.com"
         ],
         "remo": [
             "https://reps.mozilla.org"
         ],
         "rss": [
-            "https://blog.bitergia.com/feed/"
-        ],
-        "stackexchange": [
-            "https://stackoverflow.com/questions/tagged/ovirt",
-            "https://stackoverflow.com/questions/tagged/rdo",
-            "https://stackoverflow.com/questions/tagged/kibana"
+            "http://example.com/rss"
         ],
         "slack": [
-            "C7LSGB0AU"
+            "C011DUKE8"
+        ],
+        "stackexchange": [
+            "https://stackoverflow.com/questions/tagged/python"
         ],
         "supybot": [
             "openshift /home/grimoirelab/.perceval/irc/percevalbot/logs/ChannelLogger/freenode/#openshift/"
         ],
         "telegram": [
-            "Mozilla_analytics"
+            "mybot"
         ],
         "twitter": [
             ""
