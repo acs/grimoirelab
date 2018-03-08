@@ -4,6 +4,7 @@
 
 elasticsearch:
   image: bitergia/elasticsearch:5.6.0
+#  image: bitergia/elasticsearch:6.1.0
   command: /elasticsearch/bin/elasticsearch -E network.bind_host=0.0.0.0
   ports:
     - "9200:9200"
@@ -14,6 +15,7 @@ elasticsearch:
 
 kibiter:
   image: bitergia/kibiter:5.6.0
+#  image: bitergia/kibiter:6.1.0
   links:
     - elasticsearch
   ports:
@@ -49,6 +51,6 @@ mordred:
     - redis
   volumes:
     # The stage for this mordred load raw items, waits for ES ...
-    - ./stage:/home/grimoirelab/stage
-    - .:/home/grimoirelab/conf
-    - ./logs:/home/grimoirelab/logs
+    - ./stage:/home/bitergia/stage
+    - .:/home/bitergia/conf
+    - ./logs:/home/bitergia/logs
