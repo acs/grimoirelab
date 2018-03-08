@@ -24,17 +24,12 @@
 #
 
 import argparse
-import sys
 
 import requests
 
-MAX_REPOS = 20  # script does not paginate to get more than 20 items
-ORG = 'grimoirelab'
+ORG = 'chaoss'
 GITHUB_REPOS_API = 'https://api.github.com/repos' + '/' + ORG
 GITHUB_ORGS_API = 'https://api.github.com/orgs' + '/'+ ORG
-
-# HACK to cover the migration to CHAOSS of GrimoireLab repositories
-CHAOSS_REPOS = ['https://api.github.com/repos/chaoss/grimoirelab-manuscripts', 'https://api.github.com/repos/chaoss/grimoirelab-kidash']
 
 def get_params():
     parser = argparse.ArgumentParser(usage="usage:last_commits.py [options]",
@@ -51,21 +46,23 @@ def send_github(url, headers=None):
     return res
 
 def get_repositories():
-    repos = []
     repos_url = GITHUB_ORGS_API + "/repos"
-    res = send_github(repos_url)
-    res.raise_for_status()
+    page = 1
 
-    repos_dict = res.json()
+    while True:
+        res = send_github(repos_url + "?page=%i" % page)
+        page += 1  # Prepara for next page request
+        res.raise_for_status()
 
-    if len(repos_dict) >= MAX_REPOS:
-        print("Max repositories reached: %i. Exiting." % MAX_REPOS)
-        sys.exit(1)
+        repos_dict = res.json()
 
-    for repo in repos_dict:
-        repos.append(repo['name'])
+        if not repos_dict:
+            break
 
-    return repos
+        for repo in repos_dict:
+            if "grimoirelab" not in repo['name']:
+                continue
+            yield repo['name']
 
 if __name__ == '__main__':
 
@@ -77,11 +74,4 @@ if __name__ == '__main__':
         res = send_github(commits_url)
         commit = res.json()['sha']
         repo_name = repo.upper().replace("-", "_").replace(".", "_")
-        print(repo_name + "='" + commit + "'")
-    for repo in CHAOSS_REPOS:
-        # Return the last commit from master branch
-        commits_url = repo + "/commits/master"
-        res = send_github(commits_url)
-        commit = res.json()['sha']
-        repo_name = repo.rsplit("/", 1)[1].replace("grimoirelab-", "").upper()
         print(repo_name + "='" + commit + "'")
