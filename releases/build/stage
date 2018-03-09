@@ -68,10 +68,10 @@ echo "Kibiter OK"
 ## END STEPS ONLY DONE FOR THE TESTING OF GRIMOIRELAB
 ###
 
+cd $CONF_DIR
 # Hack to get the panels menu file
-wget https://raw.githubusercontent.com/grimoirelab/mordred/master/menu.yaml
-mordred -c $CONF_DIR/setup.cfg
-
+wget -O menu.yaml https://raw.githubusercontent.com/grimoirelab/mordred/master/menu.yaml
+mordred -c setup.cfg
 
 # Debugging the migration to perceval archive
 # sleep 36000
