@@ -27,7 +27,7 @@ fi
 
 # Create the logs dir if it does not exists and clean it
 mkdir -p logs
-rm logs/*
+rm -rf logs/*
 # First stop mordred containers for doing the release testing
 docker-compose stop mordred
 # Remove mordred container
