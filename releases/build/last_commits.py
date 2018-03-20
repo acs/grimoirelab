@@ -73,5 +73,10 @@ if __name__ == '__main__':
         commits_url = GITHUB_REPOS_API + "/" + repo + "/commits/master"
         res = send_github(commits_url)
         commit = res.json()['sha']
-        repo_name = repo.upper().replace("-", "_").replace(".", "_")
+        repo_name = repo.upper().replace("GRIMOIRELAB-", "").replace("-", "_").replace(".", "_")
+        # Some exceptions to teh general rules
+        if repo_name == "TOOLKIT":
+            repo_name = "GRIMOIRELAB_TOOLKIT"
+        elif repo_name == "ELK":
+            repo_name = "GRIMOIREELK"
         print(repo_name + "='" + commit + "'")
