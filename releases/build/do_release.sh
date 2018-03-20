@@ -42,4 +42,4 @@ grep -i error logs/all.log
 echo "Checking panels ..."
 PYTHONPATH=panels/src ./check_panels.py 2>/dev/null| grep -B2 "RESULT:  KO" | grep Checking | awk '{print $2}' | sort
 echo "Checking Elasticsearch logs ..."
-docker logs tests_elasticsearch_1  | grep -B1 -i exception
+docker logs build_elasticsearch_1  | grep -B1 -i exception
