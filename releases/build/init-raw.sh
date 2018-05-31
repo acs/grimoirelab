@@ -7,4 +7,4 @@ $RAW2FILE -g  -p -e $ES -i test_google_hits-raw -f $CACHE/raw/google_hits.json
 $RAW2FILE -g  -p -e $ES -i test_apache-raw -f $CACHE/raw/apache.json
 $RAW2FILE -g  -p -e $ES -i test_twitter-raw -f $CACHE/raw/twitter.json
 $RAW2FILE -g  -p -e $ES -i test_remo_activities-raw -f $CACHE/raw/remo_activities.json
-$RAW2FILE -g  -p -e $ES -i test_crates-raw -f $CACHE/raw/crates.json
+# $RAW2FILE -g  -p -e $ES -i test_crates-raw -f $CACHE/raw/crates.json

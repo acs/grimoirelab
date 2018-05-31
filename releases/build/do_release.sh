@@ -38,7 +38,7 @@ docker-compose rm -f mordred
 echo "Executing mordred container ..."
 docker-compose -f docker-compose.yml -f docker-compose-local.yml up mordred
 echo "Checking for errors mordred execution ..."
-grep -i error logs/all.log
+grep ERROR logs/all.log
 echo "Checking panels ..."
 PYTHONPATH=panels/src ./check_panels.py 2>/dev/null| grep -B2 "RESULT:  KO" | grep Checking | awk '{print $2}' | sort
 echo "Checking Elasticsearch logs ..."
