@@ -71,5 +71,5 @@ echo "Kibiter OK"
 cd $CONF_DIR
 # Hack to get the panels menu file
 wget -O menu.yaml https://raw.githubusercontent.com/grimoirelab/mordred/master/menu.yaml
-mordred -c setup.cfg
+sirmordred -c setup.cfg
 # sleep 3600
