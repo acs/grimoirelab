@@ -79,6 +79,4 @@ if __name__ == '__main__':
             repo_name = "GRIMOIRELAB_TOOLKIT"
         elif repo_name == "ELK":
             repo_name = "GRIMOIREELK"
-        elif repo_name == "SIRMORDRED":
-            repo_name = "MORDRED"
         print(repo_name + "='" + commit + "'")
