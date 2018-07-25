@@ -16,7 +16,8 @@ fi
 
 # get grimoirelab repo for the build_grimoirelab script
 # git clone https://github.com/grimoirelab/grimoirelab.git --depth 1
-wget https://raw.githubusercontent.com/chaoss/grimoirelab/master/utils/build_grimoirelab
+# wget https://raw.githubusercontent.com/chaoss/grimoirelab/master/utils/build_grimoirelab
+wget https://raw.githubusercontent.com/acs/grimoirelab/fix-build_grimoirelab-sirmordred/utils/build_grimoirelab
 chmod 755 build_grimoirelab
 
 echo "Installing and checking GrimoireLab Release"
@@ -72,4 +73,4 @@ cd $CONF_DIR
 # Hack to get the panels menu file
 wget -O menu.yaml https://raw.githubusercontent.com/grimoirelab/mordred/master/menu.yaml
 sirmordred -c setup.cfg
-# sleep 3600
+# sleep 36000
