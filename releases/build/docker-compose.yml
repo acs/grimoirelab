@@ -3,19 +3,20 @@
 # to url = http://elasticsearch:9200
 
 elasticsearch:
-  image: bitergia/elasticsearch:5.6.0
-  # image: bitergia/elasticsearch:6.1.0
+  # image: bitergia/elasticsearch:5.6.0
+  image: bitergia/elasticsearch:6.1.0
   command: /elasticsearch/bin/elasticsearch -E network.bind_host=0.0.0.0
   ports:
     - "9200:9200"
   environment:
     - ES_JAVA_OPTS=-Xms4g -Xmx4g
-#  volumes:
+  volumes:
 #    - ./elasticsearch.yml:/elasticsearch/config/elasticsearch.yml
+    - ./elasticsearch-data:/elasticsearch/data/
 
 kibiter:
-  image: bitergia/kibiter:5.6.0
-  # image: bitergia/kibiter:6.1.0-optimized
+  # image: bitergia/kibiter:5.6.0
+  image: bitergia/kibiter:6.1.0-optimized
   links:
     - elasticsearch
   ports:
